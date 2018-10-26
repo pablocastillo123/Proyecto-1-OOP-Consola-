@@ -1,16 +1,22 @@
 package com.pdcg.consolaexplorador;
 
-import java.io.File;
+import java.io.*;
+import java.nio.file.*;
 
+//funciones de la consola 
 public class ManejadorDirectorio {
-	private String directorioActual;
+	private String ruta;
 	
 	public ManejadorDirectorio() {
-		directorioActual = "C://Dev-Cpp";
+		ruta = "C:/Users/pablo/Desktop/pruebaC";
 	}
 	
-	public void crearDirectorio(String nomdir) {
-		File fl = new File (nomdir);
+	
+
+
+
+	public void crearDirectorio(String iruta) {
+		File fl = new File (iruta);
 		
 		if (fl.mkdirs())
 			System.out.println ("directorio fue creado existe");
@@ -18,42 +24,45 @@ public class ManejadorDirectorio {
 			System.out.println ("directorio no fue creado");
 	}
 
-	public void leerDirectorio(String nomdir) {
-		leerDirectorioRuta(nomdir);
+	public void leerDirectorio(String iruta) {
+		leerDirectorioRuta(iruta);
 	}
 	
 	public void leerDirectorio() {
-		leerDirectorioRuta(directorioActual);
+		leerDirectorioRuta(ruta);
 	}
 	
 	public void leerDirectorioRuta(String nomdir) {
 		try {
 			File fl = new File (nomdir);
-			if (fl.isDirectory()) {
-				System.out.println ("Directorio de " + nomdir);
+		
+				System.out.println ("Directorio de " + nomdir+"\n");
+				
 				String s[] = fl.list();
 				for (int i = 0; i<s.length; i++) {
-					File f = new File (nomdir + "/" + s[i]);
-					if (f.isDirectory()) {
-						System.out.println (s[i] + " es un directorio");
-					} 
-					else {
-						System.out.println(s[i] + " es un archivo");
-					}
+					System.out.println(s[i]);
 				}
-			} 
-			else {
-				System.out.println (nomdir + " no es un directorio");
-			}
 		} 
 		catch (Exception e) {
 			System.out.println ("\n\nNo ingreso un nombre de directorio\n\n");
 		}
 	}
 	
-	public void desplazarDirectorio(String nomdir) {
-		directorioActual = nomdir;
-		leerDirectorio(nomdir);
+	
+	public void deleteArchivo(String iruta) {
+		File ruta = new File (iruta);
+		ruta.delete();
+	}
+	
+	public void moverArchivo(String oruta,String druta) {
+		Path origen = Paths.get(oruta);
+		Path destino = Paths.get(druta);
+		try {
+			Files.move(origen, destino.resolve(origen.getFileName()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
 	}
 	
 }
