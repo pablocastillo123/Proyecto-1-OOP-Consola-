@@ -1,6 +1,7 @@
 package com.pdcg.consolaexplorador;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Windows extends ManejadorDirectorio{
@@ -62,18 +63,13 @@ public String desDirectorio(String ruta1,File ruta2,String s ) {
 		else if(opc.equalsIgnoreCase("prub")) {ruta1=c;}
 			
 		else if(opc.equalsIgnoreCase("mkdir")) {
-			 
 			iruta = entrada.next();
-			if(iruta.equals("")) {
-				System.out.println("La sintaxis del comando no es correcta.");
-			}else 
 			mkdruta=ruta1+"\\"+iruta;
-			md.crearDirectorio(mkdruta,iruta,ruta1);
+			md.crearDirectorio(mkdruta,iruta);
 			System.out.print("\n");
 		}
 			
 		else if(opc.equalsIgnoreCase("dir")) {
-			//iruta=entrada.next();
 			
 			md.leerDirectorioRuta(ruta1);
 			System.out.print("\n");
@@ -89,17 +85,19 @@ public String desDirectorio(String ruta1,File ruta2,String s ) {
 			delruta=ruta1+"\\"+iruta;
 			md.deleteArchivo(delruta);
 		}
+		else if(opc.equalsIgnoreCase("exit")) {
+			win=false;
+		}
+		
 		
 		else if(opc.equalsIgnoreCase("move")) {
 			String oruta = entrada.next(); 
 			String druta = entrada.next();
-			md.moverArchivo(oruta,druta);
+		
+			md.moverArchivo(oruta,druta,ruta1);
+		
 		}
-		//else System.out.println(opc+"no se reconoce como un comando interno o extenor");
-		
-		//	default:System.out.println(opc+" no se reconoce como un comando");
-			//break;
-		
+	
 	}
 	
   }

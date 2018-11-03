@@ -16,51 +16,28 @@ public class ManejadorDirectorio {
 	
 
 	
-	public void crearDirectorio(String mdkruta, String iruta,String ruta1) {
-		int i = 0;
+	public void crearDirectorio(String mdkruta, String iruta) {
 		
 		File fl = new File (mdkruta);
-		File fl2 = new File (ruta1);
 		
-		
-		
-		String s[] = fl.list();
-		if(iruta.equals(s[i])){
-		try {
-			while(iruta.equals(s[i])) {
-			s[i].equals(iruta);
-			i++;
-			}
-		System.out.println("Ya existe el subdirectorio o el archivo"+iruta);
-		}
-		catch(Exception e) {System.out.println("La sintaxis del comando no es correcta.");}
-		 
+		if(fl.exists()){
+			System.out.println("Ya existe el subdirectorio o el archivo "+iruta+".");
 		}else	fl.mkdirs();
 	}
 
-	public void leerDir(String ruta){
-		leerDirectorioRuta(ruta);
-		
-	}
 	
-	public void leerDirectorioRuta(String iruta) {
-		try {
-			
-			File fl = new File (iruta);
-			
-				System.out.println ("Directorio de " + iruta+"\n");
-				String s[] = fl.list();
-				for (int i = 0; i<s.length; i++) {
-					System.out.println(s[i]);
-				}
+	public void leerDirectorioRuta(String ruta1) {
 		
-		}catch (Exception e) {
-			System.out.println ("\n\nNo se encuentra el archivo \n\n");
-		
-	  }
-	}
+			File fl = new File (ruta1);
+			System.out.println ("Directorio de " + ruta1+"\n");
+			String s[] = fl.list();
+			for (int i = 0; i<s.length; i++) {
+				System.out.println(s[i]);
+			}
+		}
 	
 	public void deleteArchivo(String delruta) {
+		//solo para archivos .txt
 		File ruta = new File (delruta);
 		Scanner entrada = new Scanner(System.in);
 		
@@ -72,14 +49,19 @@ public class ManejadorDirectorio {
 		}
 
 	
-	public void moverArchivo(String oruta,String druta) {
-		Path origen = Paths.get(oruta);
-		Path destino = Paths.get(druta);
-		try {
-			Files.move(origen, destino.resolve(origen.getFileName()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void moverArchivo(String oruta,String druta,String ruta1){
+		Path origen = Paths.get(ruta1,oruta);
+		Path destino = Paths.get(ruta1,druta);
+		
+			
+				try {
+					Files.move(origen, destino.resolve(origen.getFileName()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+				
+					System.out.println("El sistema no puede encontrar el archivo especificado.\n");
+				}
+		
 	
 	}
 
