@@ -5,40 +5,39 @@ import java.util.Scanner;
 
 public class Unix {
 	private String opc,texto;
-	private String iruta,ruta1,p="",delruta,mkdruta;
+	private String iruta,ruta1,p,delruta,mkdruta;
 	private boolean win = true;
 	Scanner entrada = new Scanner(System.in);
 	ManejadorDirectorio md = new ManejadorDirectorio();
 	String c ="C:\\Users\\pablo\\desktop\\prueba";
-	String cw = "C:\\\\Windows";
+	String cw = "C:\\Windows";
 	
 	Windows wm = new Windows();
-
 
 	public void umenu() {
 		
 		
-		File vaio = new File("C:\\Users\\pablo");
+		File vaio = new File("");
 		ruta1=vaio.getAbsolutePath();
 	
 
 	while(win){
-		
+		p="";
 		for(int i=0;i<ruta1.length();i++) {
-			char ch[] = new char[ruta1.length()];
+			char b[];
+			b = new char[ruta1.length()];
 			if(ruta1.charAt(i)=='\\') {
-				ch[i]='/';
+				b[i]='/';
 			}
 			else {
-				ch[i]=ruta1.charAt(i);
+				b[i]=ruta1.charAt(i);
 			}
 			
-			p=p+ch[i];
+			p=p+b[i];
 		}
-		
-		File ruta2=new File(ruta1);
+		File ruta2 = new File(ruta1);
 		p=p.toUpperCase().replaceAll("C:/users".toUpperCase(), "~");
-		System.out.print(p+"$");
+		System.out.print("\n"+p+" $");
 		opc = entrada.next();
 		
 		
@@ -59,7 +58,7 @@ public class Unix {
 			}
 		}
 			
-		else if(opc.equalsIgnoreCase("dir")) {
+		else if(opc.equalsIgnoreCase("is")) {
 			md.leerDirectorioRuta(ruta1);
 			System.out.print("\n");
 		}
@@ -76,7 +75,7 @@ public class Unix {
 	    	}
 	    }
 	   
-		else if(opc.equalsIgnoreCase("del")) {
+		else if(opc.equalsIgnoreCase("rm")) {
 			iruta=entrada.next();
 			
 			if(ruta1.equalsIgnoreCase(cw)) {
@@ -90,7 +89,7 @@ public class Unix {
 		else if(opc.equalsIgnoreCase("exit")) {
 			win=false;
 		}
-		else if (opc.equalsIgnoreCase("copy")) {
+		else if (opc.equalsIgnoreCase("cp")) {
 			
 			if(ruta1.equalsIgnoreCase(cw)) {
 				System.out.println("No puede Acceder a esta ruta");}
@@ -103,7 +102,7 @@ public class Unix {
 			}
 		}
 		
-		else if(opc.equalsIgnoreCase("move")) {
+		else if(opc.equalsIgnoreCase("mv")) {
 			
 			if(ruta1.equalsIgnoreCase(cw)) {
 				System.out.println("No puede Acceder a esta ruta");}

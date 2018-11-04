@@ -12,7 +12,7 @@ public class Windows extends ManejadorDirectorio{
 	Scanner entrada = new Scanner(System.in);
 	ManejadorDirectorio md = new ManejadorDirectorio();
 	String c ="C:\\Users\\pablo\\desktop\\prueba";
-	String cw = "C:\\\\Windows";
+	String cw = "C:\\Windows";
 	
 public String des(String ruta1,String a) {
 	char []ch = new char[a.length()];
@@ -30,16 +30,16 @@ public String des(String ruta1,String a) {
 	
 public String desDirectorio(String ruta1,File ruta2,String s ) {
 	Scanner sn1 = new Scanner(s);
-	if(sn1.hasNext()) {
 	
+	if(sn1.hasNext()) {
+		
 		if(s.trim().equals("..")){
 			ruta1=ruta2.getParent();}
 		
 		else ruta1=des(ruta1,s);
-		}
-		
-	return ruta1;
-}	
+	}return ruta1;
+	
+}
 	
 	
 	
@@ -62,15 +62,15 @@ public String desDirectorio(String ruta1,File ruta2,String s ) {
 		else if(opc.equalsIgnoreCase("prub")) {ruta1=c;}
 			
 		else if(opc.equalsIgnoreCase("mkdir")) {
-			iruta = entrada.next();
-			
+				
 			if(ruta1.equalsIgnoreCase(cw)) {
 				System.out.println("No puede Acceder a esta ruta");}
-			else {
+	    	else {
+				iruta = entrada.next();
 				mkdruta=ruta1+"\\"+iruta;
 				md.crearDirectorio(mkdruta,iruta,ruta1);
 				System.out.print("\n");
-			}
+	    	}
 		}
 			
 		else if(opc.equalsIgnoreCase("dir")) {
@@ -89,6 +89,8 @@ public String desDirectorio(String ruta1,File ruta2,String s ) {
 	    		System.out.print("\n");
 	    	}
 	    }
+		
+		
 	   
 		else if(opc.equalsIgnoreCase("del")) {
 			iruta=entrada.next();
