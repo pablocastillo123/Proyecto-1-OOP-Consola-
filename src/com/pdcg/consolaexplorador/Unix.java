@@ -1,63 +1,49 @@
 package com.pdcg.consolaexplorador;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
-public class Windows extends ManejadorDirectorio{
-	
+public class Unix {
 	private String opc,texto;
-	private String iruta,ruta1,delruta,mkdruta;
+	private String iruta,ruta1,p="",delruta,mkdruta;
 	private boolean win = true;
 	Scanner entrada = new Scanner(System.in);
 	ManejadorDirectorio md = new ManejadorDirectorio();
 	String c ="C:\\Users\\pablo\\desktop\\prueba";
 	String cw = "C:\\\\Windows";
 	
-public String des(String ruta1,String a) {
-	char []ch = new char[a.length()];
-	for(int i=0;i<a.length();i++) {
+	Windows wm = new Windows();
+
+
+	public void umenu() {
 		
-		if(i==0){
-			ruta1=ruta1+"\\";
-		}
 		
-			ch[i]=a.charAt(i);
-		    ruta1=ruta1+ch[i];
-	  }
-	return ruta1;
-	}
-	
-public String desDirectorio(String ruta1,File ruta2,String s ) {
-	Scanner sn1 = new Scanner(s);
-	if(sn1.hasNext()) {
-	
-		if(s.trim().equals("..")){
-			ruta1=ruta2.getParent();}
-		
-		else ruta1=des(ruta1,s);
-		}
-		
-	return ruta1;
-}	
-	
-	
-	
-	
-	public void wmenu() {
-	
 		File vaio = new File("C:\\Users\\pablo");
 		ruta1=vaio.getAbsolutePath();
 	
 
 	while(win){
+		
+		for(int i=0;i<ruta1.length();i++) {
+			char ch[] = new char[ruta1.length()];
+			if(ruta1.charAt(i)=='\\') {
+				ch[i]='/';
+			}
+			else {
+				ch[i]=ruta1.charAt(i);
+			}
+			
+			p=p+ch[i];
+		}
+		
 		File ruta2=new File(ruta1);
-		System.out.print(ruta2+">");
+		p=p.toUpperCase().replaceAll("C:/users".toUpperCase(), "~");
+		System.out.print(p+"$");
 		opc = entrada.next();
 		
 		
 		if(opc.equalsIgnoreCase("cd")) {
-			ruta1=desDirectorio(ruta1,ruta2,entrada.next());
+			ruta1=wm.desDirectorio(ruta1,ruta2,entrada.next());
 		}
 		else if(opc.equalsIgnoreCase("prub")) {ruta1=c;}
 			
@@ -130,7 +116,7 @@ public String desDirectorio(String ruta1,File ruta2,String s ) {
 			}
 		}
 		else System.out.println("("+opc+") No se reconoce como comando interno o externo \n");
+		
+	   }
 	}
-	
-  }
 }

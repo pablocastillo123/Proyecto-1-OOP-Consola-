@@ -8,7 +8,8 @@ public class Main {
 		
 		int m;
 		Windows wm = new Windows();
-		System.out.println("Windows(1) Unix(2)");
+		Unix um = new Unix();
+		System.out.print("Windows(1) Unix(2):");
 		Scanner entrada = new Scanner(System.in);
 		
 		m = entrada.nextInt();
@@ -19,6 +20,7 @@ public class Main {
 			wm.wmenu();
 			break;
 		case 2:
+			um.umenu();
 			break;
 		
 		}
